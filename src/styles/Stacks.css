@@ -1,0 +1,110 @@
+/* src/styles/Stacks.css */
+
+.stacks { background: var(--bg-base); }
+.stacks__inner { width: 100%; }
+
+.stacks__header { margin-bottom: var(--space-8); }
+
+.stacks__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+/* ── Card ───────────────────────────────────────────────────── */
+.stack-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-lg);
+  padding: var(--space-6);
+  transition: border-color var(--t-med), background var(--t-med);
+}
+
+.stack-card:hover {
+  border-color: var(--border-muted);
+  background: var(--bg-elevated);
+}
+
+.stack-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.stack-card__icon {
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.stack-card__cat {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ── Items ──────────────────────────────────────────────────── */
+.stack-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.stack-item { display: flex; flex-direction: column; gap: 6px; }
+
+.stack-item__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stack-item__name {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.stack-item__pct {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.stack-item__bar {
+  width: 100%;
+  height: 3px;
+  background: var(--bg-overlay);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.stack-item__fill {
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--cyan) 100%);
+  animation: barGrow 1s var(--ease) 0.2s both;
+}
+
+@keyframes barGrow {
+  from { width: 0; }
+  to   { width: var(--width); }
+}
+
+.stack-card:nth-child(2) .stack-item__fill {
+  background: linear-gradient(90deg, var(--purple) 0%, var(--accent) 100%);
+}
+.stack-card:nth-child(3) .stack-item__fill {
+  background: linear-gradient(90deg, var(--cyan) 0%, var(--purple) 100%);
+}
+.stack-card:nth-child(4) .stack-item__fill {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--purple) 100%);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .stacks__grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,186 @@
+/* src/styles/CV.css */
+
+.cv { background: var(--bg-surface); }
+.cv__inner { width: 100%; }
+
+.cv__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.cv__download {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.cv__grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+/* ── Section ────────────────────────────────────────────────── */
+.cv__section {
+  margin-bottom: var(--space-7);
+}
+
+.cv__section-title {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cv__section-marker { color: var(--accent); }
+
+/* ── Entries ────────────────────────────────────────────────── */
+.cv__entries { display: flex; flex-direction: column; gap: var(--space-6); }
+
+.cv-entry {
+  padding: var(--space-5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-md);
+  transition: border-color var(--t-med), background var(--t-med);
+}
+
+.cv-entry:hover {
+  border-color: var(--border-accent);
+  background: var(--accent-subtle);
+}
+
+.cv-entry__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.cv-entry__meta,
+.cv-entry__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cv-entry__aside { align-items: flex-end; }
+
+.cv-entry__role {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cv-entry__org {
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+.cv-entry__period {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.cv-entry__location {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.cv-entry__points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.cv-entry__point {
+  display: flex;
+  gap: var(--space-3);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.cv-entry__bullet {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 0.6rem;
+}
+
+/* ── Education ──────────────────────────────────────────────── */
+.cv-edu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-4);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-md);
+}
+
+.cv-edu__degree {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.cv-edu__school {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.cv-edu__year {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.cv-edu__note {
+  font-size: 0.7rem;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+/* ── Chips ──────────────────────────────────────────────────── */
+.cv__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ── Languages ──────────────────────────────────────────────── */
+.cv__langs { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.cv-lang {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.78rem;
+}
+
+.cv-lang__name { color: var(--text-secondary); }
+.cv-lang__level {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .cv__grid { grid-template-columns: 1fr; }
+  .cv-entry__aside { align-items: flex-start; }
+}
