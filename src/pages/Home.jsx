@@ -6,7 +6,7 @@ const ROLES = [
   'Full-Stack Developer',
   'Open Source Contributor',
   'Problem Solver',
-  'UI/UX Enthusiast',
+  'Travel Enthusiast',
 ];
 
 export default function Home() {
@@ -91,7 +91,8 @@ export default function Home() {
         </div>
 
         {/* Right column — decorative terminal */}
-        <div className="home__terminal animate-fade-up" style={{ animationDelay: '0.4s' }}>
+        
+        {/* <div className="home__terminal animate-fade-up" style={{ animationDelay: '0.4s' }}>
           <div className="terminal">
             <div className="terminal__bar">
               <span className="terminal__dot terminal__dot--red" />
@@ -106,8 +107,8 @@ export default function Home() {
                 <p>{'  '}<span className="t-key">"name"</span>: <span className="t-str">"Afrina Kabir"</span>,</p>
                 <p>{'  '}<span className="t-key">"role"</span>: <span className="t-str">"Full-Stack Dev"</span>,</p>
                 <p>{'  '}<span className="t-key">"exp"</span>: <span className="t-num">2+</span>,</p>
-                <p>{'  '}<span className="t-key">"remote"</span>: <span className="t-bool">true</span>,</p>
-                <p>{'  '}<span className="t-key">"coffee"</span>: <span className="t-str">"essential"</span></p>
+                <p>{'  '}<span className="t-key">"work-mode"</span>: <span className="t-bool">hybrid</span>,</p>
+                <p>{'  '}<span className="t-key">"tour"</span>: <span className="t-str">"essential"</span></p>
                 <p><span className="t-brace">{'}'}</span></p>
               </div>
               <p className="t-gap"><span className="t-prompt">~</span> <span className="t-cmd">ls skills/</span></p>
@@ -117,7 +118,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+        */}
+      </div> 
 
       {/* Scroll indicator */}
       <div className="home__scroll">

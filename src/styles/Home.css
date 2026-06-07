@@ -37,19 +37,29 @@
 }
 
 .home__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-8);
+  display: flex;          /* Changed from grid to flex */
+  justify-content: center; /* Centers your content perfectly on the entire screen */
   align-items: center;
+  gap: var(--space-8);
   min-height: calc(100vh - var(--nav-height) - var(--space-8));
 }
 
+.home__content {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  text-align: center;     
+  max-width: 650px; 
+  /* width: 100%; optionally add this if it still looks narrow */      
+  margin: 0 auto;
+}
+
 /* ── Content ────────────────────────────────────────────────── */
+
 .home__greeting {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-bottom: var(--space-4);
-  letter-spacing: 0.04em;
+  align-self: flex-start; 
+  text-align: left;       
+  width: 100%;            
 }
 
 .home__prompt {

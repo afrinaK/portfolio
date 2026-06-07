@@ -83,7 +83,9 @@ export default function CV() {
             </div>
           </div>
 
+
           {/* Education + extras */}
+          {/*
           <div className="cv__sidebar">
             <div className="cv__section">
               <h3 className="cv__section-title">
@@ -134,6 +136,11 @@ export default function CV() {
               </div>
             </div>
           </div>
+
+          */}
+
+
+
         </div>
       </div>
     </section>
