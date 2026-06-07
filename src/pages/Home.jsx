@@ -4,9 +4,21 @@ import '../styles/Home.css';
 
 const ROLES = [
   'Full-Stack Developer',
-  'Open Source Contributor',
   'Problem Solver',
   'Travel Enthusiast',
+];
+
+const STATS = [
+  { value: '2+',  label: 'years exp.' },
+  { value: '20+', label: 'projects' },
+  { value: '5+',  label: 'clients' },
+  { value: '∞',   label: 'coffee cups' },
+];
+
+const TIMELINE = [
+  { year: '2023', role: 'Software Developer',    org: 'DataSoft Systems Bd Ltd', type: 'work' },
+  { year: '2023', role: 'B.Sc. Computer Science', org: 'MIST',                   type: 'edu'  },
+  { year: '2021', role: 'Internship',             org: 'Robi Axiata Ltd.',        type: 'edu'  },
 ];
 
 export default function Home() {
@@ -14,7 +26,6 @@ export default function Home() {
   const [displayed, setDisplayed] = useState('');
   const [deleting, setDeleting] = useState(false);
 
-  // Typewriter effect
   useEffect(() => {
     const current = ROLES[roleIndex];
     let timeout;
@@ -33,11 +44,18 @@ export default function Home() {
     return () => clearTimeout(timeout);
   }, [displayed, deleting, roleIndex]);
 
+  const scrollTo = (id) => (e) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section id="home" className="section home">
+
+      {/* ── Hero ───────────────────────────────────────────── */}
       <div className="container home__inner">
-        {/* Left column */}
         <div className="home__content">
+
           <p className="home__greeting animate-fade-up" style={{ animationDelay: '0.1s' }}>
             <span className="home__prompt">$ </span>whoami
           </p>
@@ -52,80 +70,93 @@ export default function Home() {
             <span className="home__cursor">▋</span>
           </div>
 
-          <p className="home__bio animate-fade-up" style={{ animationDelay: '0.4s' }}>
-            I craft clean, performant digital experiences. Passionate about the intersection
-            of elegant code and thoughtful design.
-          </p>
+          {/* ── Divider ── */}
+          <hr className="home__divider animate-fade-up" style={{ animationDelay: '0.35s' }} />
 
-          <div className="home__actions animate-fade-up" style={{ animationDelay: '0.5s' }}>
-            <a
-              href="#projects"
-              className="btn btn--primary"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              view work
-            </a>
-            <a
-              href="#contact"
-              className="btn btn--ghost"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              get in touch
-            </a>
-          </div>
+          {/* ── Bio + Stats grid ── */}
+          <div className="home__grid animate-fade-up" style={{ animationDelay: '0.4s' }}>
 
-          <div className="home__meta animate-fade-up" style={{ animationDelay: '0.6s' }}>
-            <span className="home__meta-item">
-              <span className="home__meta-dot home__meta-dot--green" />
-              available for work
-            </span>
-            <span className="home__meta-sep">·</span>
-            <span className="home__meta-item">Dhaka, BD</span>
-          </div>
-        </div>
+            {/* Bio */}
+            <div className="home__bio">
+              <p className="home__bio-text">
+                I'm a full-stack developer based in{' '}
+                <span className="home__hl">Dhaka, Bangladesh</span>, focused on building
+                modern, performant web applications that people love to use.
+              </p>
+              <p className="home__bio-text">
+                My approach blends technical rigor with design sensibility — I believe great
+                software should be rock-solid under the hood and a pleasure to interact with.
+                
+              </p>
+{/*               <p className="home__bio-text">
+                Outside of code, I contribute to open source, write about web development,
+                and obsess over mechanical keyboards.I enjoy working across the entire stack, from database schema design to
+                pixel-perfect UIs.
+              </p> */}
 
-        {/* Right column — decorative terminal */}
-        
-        {/* <div className="home__terminal animate-fade-up" style={{ animationDelay: '0.4s' }}>
-          <div className="terminal">
-            <div className="terminal__bar">
-              <span className="terminal__dot terminal__dot--red" />
-              <span className="terminal__dot terminal__dot--yellow" />
-              <span className="terminal__dot terminal__dot--green" />
-              <span className="terminal__title">portfolio.sh</span>
-            </div>
-            <div className="terminal__body">
-              <p><span className="t-prompt">~</span> <span className="t-cmd">cat about.json</span></p>
-              <div className="terminal__json">
-                <p><span className="t-brace">{'{'}</span></p>
-                <p>{'  '}<span className="t-key">"name"</span>: <span className="t-str">"Afrina Kabir"</span>,</p>
-                <p>{'  '}<span className="t-key">"role"</span>: <span className="t-str">"Full-Stack Dev"</span>,</p>
-                <p>{'  '}<span className="t-key">"exp"</span>: <span className="t-num">2+</span>,</p>
-                <p>{'  '}<span className="t-key">"work-mode"</span>: <span className="t-bool">hybrid</span>,</p>
-                <p>{'  '}<span className="t-key">"tour"</span>: <span className="t-str">"essential"</span></p>
-                <p><span className="t-brace">{'}'}</span></p>
+              <div className="home__actions">
+                <a href="#projects" className="btn btn--primary" onClick={scrollTo('projects')}>
+                  view work
+                </a>
+                <a href="#contact" className="btn btn--ghost" onClick={scrollTo('contact')}>
+                  get in touch
+                </a>
+{/*                 <a href="#" className="btn btn--ghost">↗ github</a>
+                <a href="#" className="btn btn--ghost">↗ linkedin</a> */}
               </div>
-              <p className="t-gap"><span className="t-prompt">~</span> <span className="t-cmd">ls skills/</span></p>
-              <p className="t-output">React&nbsp;&nbsp;Node&nbsp;&nbsp;TypeScript&nbsp;&nbsp;Python</p>
-              <p className="t-output">Docker&nbsp;&nbsp;AWS&nbsp;&nbsp;PostgreSQL</p>
-              <p className="t-gap"><span className="t-prompt">~</span> <span className="t-cursor">█</span></p>
+
+              <div className="home__meta">
+                <span className="home__meta-item">
+                  <span className="home__meta-dot home__meta-dot--green" />
+                  available for work
+                </span>
+                <span className="home__meta-sep">·</span>
+                <span className="home__meta-item">Dhaka, BD</span>
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="home__stats">
+              {STATS.map(({ value, label }) => (
+                <div key={label} className="home__stat">
+                  <span className="home__stat-value">{value}</span>
+                  <span className="home__stat-label">{label}</span>
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* ── Timeline ── */}
+          <div className="home__timeline-section animate-fade-up" style={{ animationDelay: '0.5s' }}>
+            <h3 className="home__timeline-heading">
+              <span className="home__prompt">$ </span>git log --oneline
+            </h3>
+            <div className="home__timeline">
+              {TIMELINE.map((item, i) => (
+                <div key={i} className="home__timeline-item">
+                  <div className="home__timeline-year">{item.year}</div>
+                  <div className="home__timeline-dot" />
+                  <div className="home__timeline-content">
+                    <span className="home__timeline-role">{item.role}</span>
+                    <span className="home__timeline-org">— {item.org}</span>
+                    <span className={`home__timeline-badge home__timeline-badge--${item.type}`}>
+                      {item.type}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
-        */}
-      </div> 
+      </div>
 
       {/* Scroll indicator */}
       <div className="home__scroll">
         <div className="home__scroll-line" />
         <span className="home__scroll-text">scroll</span>
       </div>
+
     </section>
   );
 }

@@ -1,110 +1,76 @@
-/* src/styles/Stacks.css */
-
 .stacks { background: var(--bg-base); }
 .stacks__inner { width: 100%; }
-
 .stacks__header { margin-bottom: var(--space-8); }
 
-.stacks__grid {
+.stacks__table { width: 100%; border-collapse: collapse; }
+
+.stacks__row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-5);
+  grid-template-columns: 110px 1fr;
+  gap: 0 24px;
+  align-items: start;
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+.stacks__row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: var(--accent-subtle);
+  transition: width 0.4s var(--ease);
+  z-index: 0;
+}
+.stacks__row:hover::before { width: 100%; }
+.stacks__row:last-child { border-bottom: none; }
+
+.stacks__cat {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding-top: 4px;
+  position: relative;
+  z-index: 1;
+  transition: color 0.4s ease;
+}
+.stacks__row:hover .stacks__cat { color: var(--text-primary); }
+
+.stacks__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
 }
 
-/* ── Card ───────────────────────────────────────────────────── */
-.stack-card {
+.stacks__pill {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--r-lg);
-  padding: var(--space-6);
-  transition: border-color var(--t-med), background var(--t-med);
+  border-radius: 4px;
+  padding: 3px 10px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    color 0.4s ease,
+    border-color 0.4s ease,
+    background 0.4s ease;
 }
-
-.stack-card:hover {
-  border-color: var(--border-muted);
-  background: var(--bg-elevated);
-}
-
-.stack-card__head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-5);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.stack-card__icon {
+.stacks__pill.visible { opacity: 1; transform: translateY(0); }
+.stacks__pill:hover {
   color: var(--accent);
-  font-size: 1rem;
+  border-color: var(--border-accent);
+  background: var(--accent-subtle);
 }
 
-.stack-card__cat {
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
-/* ── Items ──────────────────────────────────────────────────── */
-.stack-card__items {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.stack-item { display: flex; flex-direction: column; gap: 6px; }
-
-.stack-item__meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.stack-item__name {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.stack-item__pct {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-}
-
-.stack-item__bar {
-  width: 100%;
-  height: 3px;
-  background: var(--bg-overlay);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.stack-item__fill {
-  height: 100%;
-  width: 0;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--cyan) 100%);
-  animation: barGrow 1s var(--ease) 0.2s both;
-}
-
-@keyframes barGrow {
-  from { width: 0; }
-  to   { width: var(--width); }
-}
-
-.stack-card:nth-child(2) .stack-item__fill {
-  background: linear-gradient(90deg, var(--purple) 0%, var(--accent) 100%);
-}
-.stack-card:nth-child(3) .stack-item__fill {
-  background: linear-gradient(90deg, var(--cyan) 0%, var(--purple) 100%);
-}
-.stack-card:nth-child(4) .stack-item__fill {
-  background: linear-gradient(90deg, var(--accent) 0%, var(--purple) 100%);
-}
-
-/* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .stacks__grid { grid-template-columns: 1fr; }
+@media (max-width: 480px) {
+  .stacks__row { grid-template-columns: 80px 1fr; gap: 0 16px; }
+  .stacks__cat { font-size: 0.6rem; }
 }
