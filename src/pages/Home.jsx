@@ -18,7 +18,7 @@ const STATS = [
 const TIMELINE = [
   { year: '2023', role: 'Software Developer',    org: 'DataSoft Systems Bd Ltd', type: 'work' },
   { year: '2023', role: 'B.Sc. Computer Science', org: 'MIST',                   type: 'edu'  },
-  { year: '2021', role: 'Internship',             org: 'Robi Axiata Ltd.',        type: 'edu'  },
+  { year: '2021', role: 'Internship',             org: 'Robi Axiata Ltd.',        type: 'work'  },
 ];
 
 export default function Home() {
@@ -88,7 +88,7 @@ export default function Home() {
                 software should be rock-solid under the hood and a pleasure to interact with.
                 
               </p>
-{/*               <p className="home__bio-text">
+               {/* <p className="home__bio-text">
                 Outside of code, I contribute to open source, write about web development,
                 and obsess over mechanical keyboards.I enjoy working across the entire stack, from database schema design to
                 pixel-perfect UIs.
@@ -101,7 +101,7 @@ export default function Home() {
                 <a href="#contact" className="btn btn--ghost" onClick={scrollTo('contact')}>
                   get in touch
                 </a>
-{/*                 <a href="#" className="btn btn--ghost">↗ github</a>
+                {/*     <a href="#" className="btn btn--ghost">↗ github</a>
                 <a href="#" className="btn btn--ghost">↗ linkedin</a> */}
               </div>
 

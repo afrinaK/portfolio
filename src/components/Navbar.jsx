@@ -3,21 +3,21 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const NAV_LINKS = [
-  { label: 'home',     href: '/',         type: 'route' },
-  // { label: 'about',    href: '#about',    type: 'scroll' },
-  { label: 'projects', href: '#projects', type: 'scroll' },
-  { label: 'stacks',   href: '#stacks',   type: 'scroll' },
-  { label: 'cv',       href: '/cv',       type: 'route' },
-  { label: 'contact',  href: '/contact',  type: 'route' },
+  { label: 'home',       href: '/',           type: 'route' },
+  { label: 'projects',   href: '#projects',   type: 'scroll' },
+  { label: 'my_journey', href: '#my_journey', type: 'scroll' },
+  { label: 'cv',         href: '/cv',         type: 'route' },
+  { label: 'contact',    href: '/contact',    type: 'route' },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [active, setActive]     = useState('home');
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
+  const [active, setActive]       = useState('home');
+  const [menuOpen, setMenuOpen]   = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Update active link based on route
   useEffect(() => {
     if (location.pathname !== '/') {
       setActive(location.pathname);
@@ -26,6 +26,7 @@ export default function Navbar() {
     setActive('home');
   }, [location.pathname]);
 
+  // Scroll detection for active section
   useEffect(() => {
     if (location.pathname !== '/') return;
     const onScroll = () => {
@@ -95,7 +96,12 @@ export default function Navbar() {
                 <Link
                   to={link.href}
                   className={`navbar__link ${isActive(link) ? 'navbar__link--active' : ''}`}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    if (link.href === '/' && location.pathname === '/') {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                  }}
                 >
                   <span className="navbar__link-num">_</span>
                   {link.label}
@@ -104,7 +110,6 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-
       </div>
     </nav>
   );

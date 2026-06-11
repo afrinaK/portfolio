@@ -18,7 +18,6 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // In production: call your API / EmailJS / Formspree here
     setSent(true);
   };
 

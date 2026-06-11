@@ -4,157 +4,156 @@ import '../styles/Projects.css';
 
 const PROJECTS = [
   {
-    id: '01',
-    title: 'NeuralBoard',
-    desc: 'An AI-powered kanban system with intelligent task prioritization, natural language input, and team analytics dashboard.',
-    tags: ['React', 'Node.js', 'OpenAI', 'PostgreSQL'],
-    status: 'live',
+    id: 1,
+    title: 'Project Alpha',
+    tag: 'full-stack',
     year: '2024',
-    link: '#',
-    repo: '#',
-    featured: true,
+    description:
+      'A brief description of what this project does, the problem it solves, and anything notable about the approach or stack.',
+    tech: ['React', 'Node.js', 'PostgreSQL'],
+    image: '/images/project-alpha.png', // replace with your image path
+    links: {
+      live: 'https://example.com',
+      github: 'https://github.com',
+    },
   },
   {
-    id: '02',
-    title: 'Codeshift CLI',
-    desc: 'Developer CLI tool for automated codebase migrations and refactoring with AST-level transformations.',
-    tags: ['TypeScript', 'Node.js', 'AST', 'Babel'],
-    status: 'live',
-    year: '2024',
-    link: '#',
-    repo: '#',
-    featured: true,
-  },
-  {
-    id: '03',
-    title: 'Spendlens',
-    desc: 'Personal finance tracker with ML-powered categorization, custom budgets, and beautiful spend visualizations.',
-    tags: ['Next.js', 'Python', 'scikit-learn', 'Supabase'],
-    status: 'live',
+    id: 2,
+    title: 'Project Beta',
+    tag: 'frontend',
     year: '2023',
-    link: '#',
-    repo: '#',
-    featured: true,
+    description:
+      'Another project description. Keep it to two or three sentences — enough to explain the idea and your role.',
+    tech: ['Vue', 'Tailwind', 'Firebase'],
+    image: '/images/project-beta.png',
+    links: {
+      live: 'https://example.com',
+      github: 'https://github.com',
+    },
   },
   {
-    id: '04',
-    title: 'DocFlow',
-    desc: 'Real-time collaborative document editor with conflict-free replicated data types and offline support.',
-    tags: ['React', 'CRDTs', 'WebSockets', 'IndexedDB'],
-    status: 'wip',
+    id: 3,
+    title: 'Project Gamma',
+    tag: 'backend',
     year: '2023',
-    link: '#',
-    repo: '#',
-    featured: false,
-  },
-  {
-    id: '05',
-    title: 'Templ8',
-    desc: 'CLI scaffolding tool that generates production-ready project structures from community-curated templates.',
-    tags: ['Go', 'CLI', 'Open Source'],
-    status: 'live',
-    year: '2022',
-    link: '#',
-    repo: '#',
-    featured: false,
-  },
-  {
-    id: '06',
-    title: 'StormWatch',
-    desc: 'Hyperlocal weather app using multiple API aggregation and custom alert engine built on WebSockets.',
-    tags: ['React Native', 'Node.js', 'Weather API'],
-    status: 'archived',
-    year: '2022',
-    link: '#',
-    repo: '#',
-    featured: false,
+    description:
+      'Description of a backend-focused project. Mention scale, interesting constraints, or architecture decisions.',
+    tech: ['Laravel', 'MySQL', 'Redis'],
+    image: '/images/project-gamma.png',
+    links: {
+      github: 'https://github.com',
+    },
   },
 ];
 
-const STATUS_MAP = {
-  live:     { label: 'live',     color: '#3fb950' },
-  wip:      { label: 'wip',      color: '#f0883e' },
-  archived: { label: 'archived', color: '#484f58' },
-};
+const FILTERS = ['all', 'full-stack', 'frontend', 'backend'];
 
 export default function Projects() {
-  const [filter, setFilter] = useState('all');
+  const [active, setActive] = useState('all');
 
-  const filtered = filter === 'featured'
-    ? PROJECTS.filter(p => p.featured)
-    : PROJECTS;
+  const filtered =
+    active === 'all' ? PROJECTS : PROJECTS.filter((p) => p.tag === active);
 
   return (
     <section id="projects" className="section projects">
+
+      {/* Background glow */}
+      <div className="projects__glow" aria-hidden="true" />
+
       <div className="container projects__inner">
-        {/* Header */}
-        <div className="projects__header">
-          <div>
-            <p className="section-label">02 — projects</p>
-            <h2 className="section-title">Selected Work</h2>
-          </div>
 
-          {/* Filter pills */}
-          <div className="projects__filters">
-            {['all', 'featured'].map(f => (
-              <button
-                key={f}
-                className={`projects__filter ${filter === f ? 'projects__filter--active' : ''}`}
-                onClick={() => setFilter(f)}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
+        {/* ── Header ── */}
+        <div className="projects__header animate-fade-up">
+          <p className="projects__eyebrow">
+            <span className="home__prompt">$ </span>ls ./projects
+          </p>
+          <h2 className="projects__heading">
+            things I've <span className="home__name-accent">built</span>
+          </h2>
+          <p className="projects__subheading">
+            A selection of projects across the stack — from internal tools to
+            consumer-facing products.
+          </p>
         </div>
 
-        {/* Table header */}
-        <div className="projects__table-head">
-          <span>_id</span>
-          <span>project</span>
-          <span className="projects__col-tags">stack</span>
-          <span>year</span>
-          <span>status</span>
-          <span>links</span>
+        {/* ── Filters ── */}
+        <div className="projects__filters animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          {FILTERS.map((f) => (
+            <button
+              key={f}
+              className={`projects__filter ${active === f ? 'projects__filter--active' : ''}`}
+              onClick={() => setActive(f)}
+            >
+              {f}
+            </button>
+          ))}
         </div>
 
-        {/* Rows */}
-        <div className="projects__list">
-          {filtered.map((project) => {
-            const status = STATUS_MAP[project.status];
-            return (
-              <div key={project.id} className="project-row">
-                <span className="project-row__id">{project.id}</span>
+        {/* ── Grid ── */}
+        <div className="projects__grid">
+          {filtered.map((project, i) => (
+            <article
+              key={project.id}
+              className="project-card animate-fade-up"
+              style={{ animationDelay: `${0.15 + i * 0.1}s` }}
+            >
+              {/* Image */}
+              <div className="project-card__img-wrap">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="project-card__img"
+                  loading="lazy"
+                />
+                <div className="project-card__img-overlay" />
 
-                <div className="project-row__info">
-                  <span className="project-row__title">{project.title}</span>
-                  <span className="project-row__desc">{project.desc}</span>
-                </div>
-
-                <div className="project-row__tags">
-                  {project.tags.slice(0, 3).map(tag => (
-                    <span key={tag} className="project-row__tag">{tag}</span>
-                  ))}
-                </div>
-
-                <span className="project-row__year">{project.year}</span>
-
-                <span
-                  className="project-row__status"
-                  style={{ '--status-color': status.color }}
-                >
-                  <span className="project-row__status-dot" />
-                  {status.label}
-                </span>
-
-                <div className="project-row__links">
-                  <a href={project.link} className="project-row__link" title="Live site">↗</a>
-                  <a href={project.repo} className="project-row__link" title="Repository">{ }</a>
+                {/* Hover links */}
+                <div className="project-card__hover-links">
+                  {project.links.live && (
+                    <a
+                      href={project.links.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-card__icon-link"
+                      aria-label="View live site"
+                    >
+                      ↗
+                    </a>
+                  )}
+                  {project.links.github && (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-card__icon-link"
+                      aria-label="View source"
+                    >
+                      gh
+                    </a>
+                  )}
                 </div>
               </div>
-            );
-          })}
+
+              {/* Body */}
+              <div className="project-card__body">
+                <div className="project-card__meta">
+                  <span className="project-card__tag">{project.tag}</span>
+                  <span className="project-card__year">{project.year}</span>
+                </div>
+
+                <h3 className="project-card__title">{project.title}</h3>
+                <p className="project-card__desc">{project.description}</p>
+
+                <ul className="project-card__tech">
+                  {project.tech.map((t) => (
+                    <li key={t} className="project-card__tech-item">{t}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
         </div>
+
       </div>
     </section>
   );
