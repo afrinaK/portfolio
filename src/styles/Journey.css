@@ -1,0 +1,316 @@
+/* src/styles/Journey.css */
+
+/* ── Section ─────────────────────────────────────────────────── */
+.journey {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+/* ── Prompt ──────────────────────────────────────────────────── */
+.journey__prompt {
+  position: absolute;
+  top: var(--space-6);
+  left: var(--space-8);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  z-index: 10;
+}
+
+.journey__prompt-dollar {
+  color: var(--accent);
+}
+
+/* ── Track ───────────────────────────────────────────────────── */
+.journey__track {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+
+/* ── Slide ───────────────────────────────────────────────────── */
+.journey__slide {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-10);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+/* Left teal accent bar */
+.journey__accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.5s ease 0.3s;
+}
+
+.journey__slide--active .journey__accent {
+  opacity: 1;
+}
+
+/* ── Content ─────────────────────────────────────────────────── */
+.journey__content {
+  max-width: 520px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease 0.15s, transform 0.55s ease 0.15s;
+}
+
+.journey__slide--active .journey__content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Badge ───────────────────────────────────────────────────── */
+.journey__badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: var(--space-4);
+}
+
+.journey__badge--education {
+  background: rgba(99, 102, 241, 0.12);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.journey__badge--competition {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.journey__badge--achievement {
+  background: rgba(45, 212, 191, 0.1);
+  color: #5eead4;
+  border: 1px solid rgba(45, 212, 191, 0.3);
+}
+
+/* ── Text ────────────────────────────────────────────────────── */
+.journey__title {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: var(--space-2);
+}
+
+.journey__inst {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-4);
+}
+
+.journey__desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 0;
+}
+
+.journey__detail {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  opacity: 0.85;
+}
+
+.journey__detail-arrow {
+  opacity: 0.5;
+}
+
+/* ── Certificate slot ────────────────────────────────────────── */
+.journey__cert {
+  margin-top: var(--space-5);
+  width: 260px;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  background: var(--bg-overlay);
+}
+
+.journey__cert-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.journey__cert-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--text-muted);
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  opacity: 0.4;
+}
+
+.journey__cert-icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* ── Ghost year ──────────────────────────────────────────────── */
+.journey__ghost-year {
+  position: absolute;
+  right: var(--space-8);
+  bottom: var(--space-6);
+  font-size: clamp(5rem, 14vw, 10rem);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--border-subtle);
+  line-height: 1;
+  letter-spacing: -4px;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+}
+
+.journey__slide--active .journey__ghost-year {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Counter ─────────────────────────────────────────────────── */
+.journey__counter {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-8);
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ── Navigation ──────────────────────────────────────────────── */
+.journey__nav {
+  position: absolute;
+  bottom: var(--space-6);
+  left: var(--space-8);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  z-index: 10;
+}
+
+.journey__nav-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--t-fast), color var(--t-fast);
+  font-family: var(--font-mono);
+}
+
+.journey__nav-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.journey__nav-btn:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+/* ── Dots ────────────────────────────────────────────────────── */
+.journey__dots {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.journey__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border-muted);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--t-fast), transform var(--t-fast);
+}
+
+.journey__dot--active {
+  background: var(--accent);
+  transform: scale(1.5);
+}
+
+/* ── Progress ────────────────────────────────────────────────── */
+.journey__progress {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-8);
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .journey__slide {
+    padding: 0 var(--space-5);
+    align-items: flex-end;
+    padding-bottom: 120px;
+  }
+
+  .journey__ghost-year {
+    right: var(--space-4);
+    bottom: auto;
+    top: var(--space-10);
+    font-size: clamp(4rem, 20vw, 6rem);
+  }
+
+  .journey__cert {
+    width: 100%;
+  }
+
+  .journey__nav {
+    left: var(--space-5);
+    bottom: var(--space-5);
+  }
+
+  .journey__progress {
+    right: var(--space-5);
+    bottom: var(--space-5);
+  }
+}

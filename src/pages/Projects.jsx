@@ -68,16 +68,13 @@ export default function Projects() {
             <span className="home__prompt">$ </span>ls ./projects
           </p>
           <h2 className="projects__heading">
-            things I've <span className="home__name-accent">built</span>
+            <span className="home__name-accent">Projects</span>
           </h2>
-          <p className="projects__subheading">
-            A selection of projects across the stack — from internal tools to
-            consumer-facing products.
-          </p>
+
         </div>
 
         {/* ── Filters ── */}
-        <div className="projects__filters animate-fade-up" style={{ animationDelay: '0.1s' }}>
+{/*         <div className="projects__filters animate-fade-up" style={{ animationDelay: '0.1s' }}>
           {FILTERS.map((f) => (
             <button
               key={f}
@@ -87,7 +84,7 @@ export default function Projects() {
               {f}
             </button>
           ))}
-        </div>
+        </div> */}
 
         {/* ── Grid ── */}
         <div className="projects__grid">

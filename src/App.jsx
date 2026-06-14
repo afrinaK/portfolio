@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-
+import Journey from './pages/Journey';
 import Projects from './pages/Projects';
 import Stacks from './pages/Stacks';
 import Works from './pages/Works';
@@ -28,6 +28,7 @@ export default function App() {
             </>
           } />
           {/* CV is separate */}
+          <Route path="/my_journey" element={<Journey />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/cv" element={<CV />} />
           <Route path="/contact" element={<Contact />} />
