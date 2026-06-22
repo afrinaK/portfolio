@@ -5,8 +5,8 @@ import { useState } from 'react';
 const PROJECTS = [
   {
     id: '01',
-    title: 'Online Business Management System',
-    desc: 'A full-stack, database-intensive e-commerce platform built with PHP and Oracle, featuring advanced database engineering such as triggers, stored procedures, relational constraints, and automated workflows.',
+    title: 'Shoppers Stop',
+    desc: 'A full‑stack, database‑intensive e‑commerce platform that features a dedicated Admin Panel for managing customer orders, products, suppliers, and deliveries. It also has a Customer Panel where users can browse product details, view images, and place orders. The system includes advanced database engineering — including triggers, stored procedures, relational constraints.',
     tags: ['PHP', 'Oracle', 'SQL'],
     status: 'live',
     year: '2021',
@@ -17,8 +17,8 @@ const PROJECTS = [
   {
     id: '02',
     title: 'TWIN',
-    desc: 'A companion robot built with Raspberry Pi and Python, featuring mood detection, reminders, security alerts, and real-time video monitoring.',
-    tags: ['Python', 'Flask', 'OpenCV', 'AI'],
+    desc: 'A companion robot featuring owner and strangers detection, mood detection of the monitored person, reminders(By voice and app), security alerts,answering questions and real-time video monitoring. The hardware is powered by a Raspberry Pi with input devices, while the software stack combines Python, Flask, OpenCV, and AI models. A companion app(flutter) enables the owner to receive alerts, view video of certain intervals, and manage notifications.',
+    tags: ['Python', 'Flask', 'OpenCV', 'AI' , 'Flutter'],
     status: 'live',
     year: '2021',
     image: '/images/projects/twin.png',
@@ -28,7 +28,7 @@ const PROJECTS = [
   {
     id: '03',
     title: 'Expense Tracker App',
-    desc: 'A Flutter mobile app for tracking and analyzing personal expenses, with category management, local storage, and visual spending insights.',
+    desc: 'Expense Tracker App is a Flutter mobile application for managing personal finances. Users can login, add, edit, and delete expenses, organize them by category, and store data . The app provides visual insights into spending patterns through charts and summaries, helping users understand and control their expenses.',
     tags: ['Dart', 'Flutter', 'Firebase'],
     status: 'live',
     year: '2023',
