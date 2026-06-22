@@ -39,6 +39,12 @@
   --cyan:           #67e8f9;
   --cyan-dim:       rgba(103, 232, 249, 0.12);
 
+  /* Status colors (shared across Works/Projects) */
+  --status-live:     #3fb950;
+  --status-live-dim: rgba(63, 185, 80, 0.5);
+  --status-wip:       #f0883e;
+  --status-archived:  #484f58;
+
   /* Typography */
   --font-mono:      'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 

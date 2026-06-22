@@ -36,35 +36,38 @@ const PROJECTS = [
     repo: '#',
     featured: true,
   },
-  {
-    id: '04',
-    title: 'Gymnesia',
-    desc: 'A gym website built with React 19, Vite, Bootstrap 5, and Axios, showcasing fitness services for a Dhaka-based fitness center',
-    tags: ['React', 'Bootstrap', 'HTML', 'JS'],
-    status: 'live',
-    year: '2023',
-    link: '#',
-    repo: '#',
-    featured: false,
-  },
-  {
-    id: '05',
-    title: 'The Dessert Club',
-    desc: 'A basic dessert selling website built with  HTML, CSS, and JavaScript, hosted on GitHub Pages.',
-    tags: ['HTML', 'CSS', 'JS','Firebase'],
-    status: 'live',
-    year: '2022',
-    link: '#',
-    repo: '#',
-    featured: false,
-  },
+  // {
+  //   id: '04',
+  //   title: 'Gymnesia',
+  //   desc: 'A gym website built with React 19, Vite, Bootstrap 5, and Axios, showcasing fitness services for a Dhaka-based fitness center',
+  //   tags: ['React', 'Bootstrap', 'HTML', 'JS'],
+  //   status: 'live',
+  //   year: '2023',
+  //   link: '#',
+  //   repo: '#',
+
+
+
+  //   featured: false,
+  // },
+  // {
+  //   id: '05',
+  //   title: 'The Dessert Club',
+  //   desc: 'A basic dessert selling website built with  HTML, CSS, and JavaScript, hosted on GitHub Pages.',
+  //   tags: ['HTML', 'CSS', 'JS','Firebase'],
+  //   status: 'live',
+  //   year: '2022',
+  //   link: '#',
+  //   repo: '#',
+  //   featured: false,
+  // },
 
 ];
 
 const STATUS_MAP = {
-  live:     { label: 'live',     color: '#3fb950' },
-  wip:      { label: 'wip',      color: '#f0883e' },
-  archived: { label: 'archived', color: '#484f58' },
+  live:     { label: 'live',     color: 'var(--status-live)' },
+  wip:      { label: 'wip',      color: 'var(--status-wip)' },
+  archived: { label: 'archived', color: 'var(--status-archived)' },
 };
 
 export default function Projects() {
@@ -141,9 +144,20 @@ export default function Projects() {
                   <a href={project.link} className="project-row__link" title="Live site">↗</a>
                   <a href={project.repo} className="project-row__link" title="Repository">{ }</a>
                 </div>
+
+
               </div>
             );
           })}
+        </div>
+        {/* Footer with See More button */}
+        <div className="work__footer">
+          <button 
+            className="see-more-btn" 
+            onClick={() => navigate('/projects')}
+          >
+            See More →
+          </button>
         </div>
       </div>
     </section>

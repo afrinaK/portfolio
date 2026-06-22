@@ -1,151 +1,162 @@
 // src/pages/Projects.jsx
-import { useState } from 'react';
 import '../styles/Projects.css';
+import { useState } from 'react';
 
 const PROJECTS = [
   {
-    id: 1,
-    title: 'Project Alpha',
-    tag: 'full-stack',
-    year: '2024',
-    description:
-      'A brief description of what this project does, the problem it solves, and anything notable about the approach or stack.',
-    tech: ['React', 'Node.js', 'PostgreSQL'],
-    image: '/images/project-alpha.png', // replace with your image path
-    links: {
-      live: 'https://example.com',
-      github: 'https://github.com',
-    },
+    id: '01',
+    title: 'Online Business Management System',
+    desc: 'A full-stack, database-intensive e-commerce platform built with PHP and Oracle, featuring advanced database engineering such as triggers, stored procedures, relational constraints, and automated workflows.',
+    tags: ['PHP', 'Oracle', 'SQL'],
+    status: 'live',
+    year: '2021',
+    image: '/images/projects/obms.png',
+    link: '#',
+    repo: '#',
   },
   {
-    id: 2,
-    title: 'Project Beta',
-    tag: 'frontend',
-    year: '2023',
-    description:
-      'Another project description. Keep it to two or three sentences — enough to explain the idea and your role.',
-    tech: ['Vue', 'Tailwind', 'Firebase'],
-    image: '/images/project-beta.png',
-    links: {
-      live: 'https://example.com',
-      github: 'https://github.com',
-    },
+    id: '02',
+    title: 'TWIN',
+    desc: 'A companion robot built with Raspberry Pi and Python, featuring mood detection, reminders, security alerts, and real-time video monitoring.',
+    tags: ['Python', 'Flask', 'OpenCV', 'AI'],
+    status: 'live',
+    year: '2021',
+    image: '/images/projects/twin.png',
+    link: '#',
+    repo: '#',
   },
   {
-    id: 3,
-    title: 'Project Gamma',
-    tag: 'backend',
+    id: '03',
+    title: 'Expense Tracker App',
+    desc: 'A Flutter mobile app for tracking and analyzing personal expenses, with category management, local storage, and visual spending insights.',
+    tags: ['Dart', 'Flutter', 'Firebase'],
+    status: 'live',
     year: '2023',
-    description:
-      'Description of a backend-focused project. Mention scale, interesting constraints, or architecture decisions.',
-    tech: ['Laravel', 'MySQL', 'Redis'],
-    image: '/images/project-gamma.png',
-    links: {
-      github: 'https://github.com',
-    },
+    image: '/images/projects/expense-tracker.png',
+    link: '#',
+    repo: '#',
+  },
+  {
+    id: '04',
+    title: 'Gymnesia',
+    desc: 'A gym and fitness center website built with React 19, Vite, Bootstrap 5, and Axios, showcasing services for a Dhaka-based fitness center.',
+    tags: ['React', 'Bootstrap', 'JavaScript'],
+    status: 'live',
+    year: '2023',
+    image: '/images/projects/gymnesia.png',
+    link: '#',
+    repo: '#',
+  },
+  {
+    id: '05',
+    title: 'The Dessert Club',
+    desc: 'A dessert-selling storefront site built with HTML, CSS, and JavaScript, with Firebase handling data, hosted on GitHub Pages.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Firebase'],
+    status: 'live',
+    year: '2022',
+    image: '/images/projects/dessert-club.png',
+    link: '#',
+    repo: '#',
   },
 ];
 
-const FILTERS = ['all', 'full-stack', 'frontend', 'backend'];
+const STATUS_LABEL = {
+  live: 'live',
+  wip: 'in progress',
+  archived: 'archived',
+};
 
-export default function Projects() {
-  const [active, setActive] = useState('all');
+function ProjectMedia({ project }) {
+  const [errored, setErrored] = useState(false);
 
-  const filtered =
-    active === 'all' ? PROJECTS : PROJECTS.filter((p) => p.tag === active);
+  if (!project.image || errored) {
+    return (
+      <div className="dl-proj-row__media-placeholder">
+        <span>{project.title}</span>
+        <span>add screenshot</span>
+      </div>
+    );
+  }
 
   return (
-    <section id="projects" className="section projects">
+    <img
+      src={project.image}
+      alt={project.title}
+      className="dl-proj-row__img"
+      loading="lazy"
+      onError={() => setErrored(true)}
+    />
+  );
+}
 
-      {/* Background glow */}
-      <div className="projects__glow" aria-hidden="true" />
+export default function Projects() {
+  return (
+    <section id="projects" className="section dl-proj">
+      <div className="container dl-proj__inner">
 
-      <div className="container projects__inner">
-
-        {/* ── Header ── */}
-        <div className="projects__header animate-fade-up">
-          <p className="projects__eyebrow">
-            <span className="home__prompt">$ </span>ls ./projects
+        {/* Header */}
+        <div className="dl-proj__header animate-fade-up">
+          <p className="section-label">$ ls ./projects</p>
+          <h2 className="section-title">All Projects</h2>
+          <p className="section-desc">
+            A complete list of things I've built — from full-stack systems to small
+            experiments.
           </p>
-          <h2 className="projects__heading">
-            <span className="home__name-accent">Projects</span>
-          </h2>
-
         </div>
 
-        {/* ── Filters ── */}
-{/*         <div className="projects__filters animate-fade-up" style={{ animationDelay: '0.1s' }}>
-          {FILTERS.map((f) => (
-            <button
-              key={f}
-              className={`projects__filter ${active === f ? 'projects__filter--active' : ''}`}
-              onClick={() => setActive(f)}
-            >
-              {f}
-            </button>
-          ))}
-        </div> */}
-
-        {/* ── Grid ── */}
-        <div className="projects__grid">
-          {filtered.map((project, i) => (
+        {/* Zigzag list */}
+        <div className="dl-proj__list">
+          {PROJECTS.map((project, i) => (
             <article
               key={project.id}
-              className="project-card animate-fade-up"
-              style={{ animationDelay: `${0.15 + i * 0.1}s` }}
+              className={`dl-proj-row animate-fade-up ${i % 2 === 1 ? 'dl-proj-row--reverse' : ''}`}
+              style={{ animationDelay: `${0.1 + i * 0.08}s` }}
             >
-              {/* Image */}
-              <div className="project-card__img-wrap">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="project-card__img"
-                  loading="lazy"
-                />
-                <div className="project-card__img-overlay" />
-
-                {/* Hover links */}
-                <div className="project-card__hover-links">
-                  {project.links.live && (
-                    <a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-card__icon-link"
-                      aria-label="View live site"
-                    >
-                      ↗
-                    </a>
-                  )}
-                  {project.links.github && (
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-card__icon-link"
-                      aria-label="View source"
-                    >
-                      gh
-                    </a>
-                  )}
-                </div>
+              <div className="dl-proj-row__media">
+                <ProjectMedia project={project} />
+                <div className="dl-proj-row__media-overlay" />
               </div>
 
-              {/* Body */}
-              <div className="project-card__body">
-                <div className="project-card__meta">
-                  <span className="project-card__tag">{project.tag}</span>
-                  <span className="project-card__year">{project.year}</span>
+              <div className="dl-proj-row__content">
+                <div className="dl-proj-row__top">
+                  <span className="dl-proj-row__index">{project.id}</span>
+                  <span className="dl-proj-row__year">{project.year}</span>
+                  <span
+                    className="dl-proj-row__status"
+                    style={{ '--status-color': `var(--status-${project.status})` }}
+                  >
+                    <span className="dl-proj-row__status-dot" />
+                    {STATUS_LABEL[project.status]}
+                  </span>
                 </div>
 
-                <h3 className="project-card__title">{project.title}</h3>
-                <p className="project-card__desc">{project.description}</p>
+                <h3 className="dl-proj-row__title">{project.title}</h3>
+                <p className="dl-proj-row__desc">{project.desc}</p>
 
-                <ul className="project-card__tech">
-                  {project.tech.map((t) => (
-                    <li key={t} className="project-card__tech-item">{t}</li>
+                <div className="dl-proj-row__tags">
+                  {project.tags.map((t) => (
+                    <span key={t} className="dl-proj-row__tag">{t}</span>
                   ))}
-                </ul>
+                </div>
+
+                <div className="dl-proj-row__links">
+                  {project.link && project.link !== '#' && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="dl-proj-row__link dl-proj-row__link--primary"
+                    >
+                      live ↗
+                    </a>
+                  )}
+
+                  {project.repo && (
+                    <a href={project.repo} target="_blank" rel="noreferrer" className="dl-proj-row__link">
+                      code
+                    </a>
+                  )}
+                </div>
               </div>
             </article>
           ))}

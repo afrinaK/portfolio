@@ -196,3 +196,18 @@
   .project-row__tags { display: flex; }
   .project-row__desc { -webkit-line-clamp: 3; }
 }
+
+.see-more-btn {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.see-more-btn:hover {
+  background: var(--accent-hover);
+}
+

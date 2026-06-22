@@ -5,47 +5,50 @@ import '../styles/Journey.css';
 const MILESTONES = [
   {
     id: 1,
-    year: '2023',
+    year: '2022',
     type: 'competition',
     title: 'NGPC — National Girls Programming Contest',
     institution: 'National Programming Competition',
     description:
-      'Participated in a nationally recognized programming contest, tackling algorithmic challenges under competition pressure.',
+      'Secured 24th position in Ada Lovelace National Girls programming contest and secured 13th position in the preliminery round.',
     detail: 'competitive programming',
-    certificate: null, // e.g. '/certs/ngpc.jpg'
+    certificate: '/images/journey/Ada_lovelace_new.png'
   },
   {
     id: 2,
     year: '2022',
-    type: 'competition',
-    title: 'Debate Competition',
-    institution: 'University Debate Club',
-    description:
-      'Competed in structured debate, sharpening critical thinking and public speaking skills under real pressure.',
-    detail: 'public speaking & logic',
-    certificate: null,
-  },
-  {
-    id: 3,
-    year: '2021',
     type: 'achievement',
     title: 'Project Competition',
     institution: 'Inter-University Project Showcase',
     description:
-      'Presented a technical project to a panel of judges, demonstrating applied engineering and problem-solving.',
+      'Secured 1st Runner Up position in Inter-University project showcasing competion arranged by Bangladesh Open Source Network.',
     detail: 'project showcased',
+    certificate: '/images/journey/Bdosn.png',
+  },
+  {
+    id: 3,
+    year: '2021',
+    type: 'competition',
+    title: 'Debate Competition',
+    institution: 'University Debate Club',
+    description:
+      'Among co‑curriculars, enjoyed debate and public speaking — attended competitions and won a few awards.',
+    detail: 'public speaking & logic',
     certificate: null,
+
   },
   {
     id: 4,
     year: '2020',
     type: 'competition',
     title: 'IT Olympiad',
-    institution: 'National IT Competition',
+    institution: 'IT Competition',
     description:
-      'Competed nationally in IT, solving real-world technical problems under strict time constraints.',
+      'Secured 2nd Runner Up position in IT olmpiad arranged by TECHWARNO, a non profit organization.',
     detail: 'competed nationally',
-    certificate: null,
+    certificate: '/images/journey/techwarno.png',
+
+    
   },
   {
     id: 5,
@@ -54,7 +57,7 @@ const MILESTONES = [
     title: 'B.Sc. in Computer Science',
     institution: 'MIST — Military Institute of Science & Technology',
     description:
-      'Four years of algorithms, systems, and software engineering. Where the foundation was built.',
+      'Joined the Computer Science and Engineering department at MIST, the journey to my dream began here.',
     detail: 'SSC 2016 · HSC 2018 · B.Sc. 2023',
     certificate: null,
   },
@@ -131,11 +134,12 @@ export default function Journey() {
   return (
     <section id="journey" className="journey" ref={containerRef}>
 
-      {/* Prompt */}
+      {/* Prompt 
       <p className="journey__prompt">
         <span className="journey__prompt-dollar">$ </span>
         cat ./my_journey.log
       </p>
+      */}
 
       {/* Slides track */}
       <div
