@@ -3,22 +3,43 @@ import { useState } from 'react';
 import '../styles/Contact.css';
 
 const SOCIALS = [
-  { label: 'github',   href: '#', handle: '@alexmorgan' },
-  { label: 'linkedin', href: '#', handle: 'in/alexmorgan' },
-  { label: 'twitter',  href: '#', handle: '@alexm_dev' },
+  { label: 'github',   href: 'https://github.com/afrinaK', handle: '@afrinaK' },
+  { label: 'linkedin', href: 'https://bd.linkedin.com/in/afrinak', handle: 'in/afrinak' },
+//  { label: 'twitter',  href: '#', handle: '@alexm_dev' },
   { label: 'email',    href: 'mailto:afrinakabir10@gmail.com', handle: 'afrinakabir10@gmail.com' },
 ];
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) =>
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('https://formspree.io/f/mkolgoad', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        setSent(true);
+      } else {
+        setError('Something went wrong. Please try again or email me directly.');
+      }
+    } catch {
+      setError('Network error. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -55,7 +76,7 @@ export default function Contact() {
                       name="name"
                       type="text"
                       className="form-input"
-                      placeholder="Afrina Kabir"
+                      placeholder="Your Name"
                       value={form.name}
                       onChange={handleChange}
                       required
@@ -91,8 +112,16 @@ export default function Contact() {
                   />
                 </div>
 
-                <button type="submit" className="btn btn--primary contact__submit">
-                  send message →
+                {error && (
+                  <p className="contact__error">{error}</p>
+                )}
+
+                <button
+                  type="submit"
+                  className="btn btn--primary contact__submit"
+                  disabled={loading}
+                >
+                  {loading ? 'sending...' : 'send message →'}
                 </button>
               </form>
             )}

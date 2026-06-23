@@ -323,4 +323,117 @@
     right: var(--space-5);
     bottom: var(--space-5);
   }
+
+
+}
+
+/* Certificate button wrapper */
+.journey__cert-btn {
+  position: relative;
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.journey__cert-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--clr-accent, #2dd4bf);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  font-family: var(--font-mono, monospace);
+}
+
+.journey__cert-btn:hover .journey__cert-overlay,
+.journey__cert-btn:focus-visible .journey__cert-overlay {
+  opacity: 1;
+}
+
+/* Lightbox backdrop */
+.journey__lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: lb-fade-in 0.2s ease;
+}
+
+@keyframes lb-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Lightbox card */
+.journey__lightbox-inner {
+  position: relative;
+  max-width: min(90vw, 900px);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  animation: lb-scale-in 0.25s ease;
+}
+
+@keyframes lb-scale-in {
+  from { transform: scale(0.93); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+/* The image itself */
+.journey__lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  display: block;
+}
+
+/* Caption */
+.journey__lightbox-caption {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* Close button */
+.journey__lightbox-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: var(--clr-accent, #2dd4bf);
+  color: #0d1117;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: transform 0.15s ease;
+}
+
+.journey__lightbox-close:hover {
+  transform: scale(1.1);
 }

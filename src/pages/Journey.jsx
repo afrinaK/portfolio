@@ -1,5 +1,5 @@
 // src/pages/Journey.jsx
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback  } from 'react';
 import '../styles/Journey.css';
 
 const MILESTONES = [
@@ -68,26 +68,32 @@ const TOTAL = MILESTONES.length;
 export default function Journey() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const [lightbox, setLightbox] = useState(null); // holds { src, alt }
   const containerRef = useRef(null);
 
-  const goTo = (index) => {
+  const goTo = useCallback((index) => {
     if (animating) return;
     const clamped = Math.max(0, Math.min(TOTAL - 1, index));
     if (clamped === current) return;
     setAnimating(true);
     setCurrent(clamped);
     setTimeout(() => setAnimating(false), 750);
-  };
+  }, [animating, current]);
 
-  // Keyboard navigation
+  const openLightbox = (src, alt) => setLightbox({ src, alt });
+  const closeLightbox = () => setLightbox(null);
+
+  // Close lightbox on Escape — note this is separate from slide navigation
   useEffect(() => {
     const onKey = (e) => {
+      if (e.key === 'Escape') { closeLightbox(); return; }
+      if (lightbox) return; // don't navigate slides while lightbox is open
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') goTo(current + 1);
       if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  goTo(current - 1);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [current, animating]);
+  }, [current, animating, lightbox, goTo]);
 
   // Wheel navigation
   useEffect(() => {
@@ -95,6 +101,7 @@ export default function Journey() {
     if (!el) return;
     let cooldown = false;
     const onWheel = (e) => {
+      if (lightbox) return; // don't scroll slides while lightbox is open
       e.preventDefault();
       if (cooldown) return;
       cooldown = true;
@@ -104,7 +111,7 @@ export default function Journey() {
     };
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
-  }, [current, animating]);
+  }, [current, animating, lightbox, goTo]);
 
   // Touch swipe
   useEffect(() => {
@@ -113,6 +120,7 @@ export default function Journey() {
     let startY = 0;
     const onTouchStart = (e) => { startY = e.touches[0].clientY; };
     const onTouchEnd = (e) => {
+      if (lightbox) return;
       const diff = startY - e.changedTouches[0].clientY;
       if (Math.abs(diff) > 40) {
         if (diff > 0) goTo(current + 1);
@@ -125,7 +133,7 @@ export default function Journey() {
       el.removeEventListener('touchstart', onTouchStart);
       el.removeEventListener('touchend', onTouchEnd);
     };
-  }, [current, animating]);
+  }, [current, animating, lightbox, goTo]);
 
   const milestone = MILESTONES[current];
   const displayNum = String(current + 1).padStart(2, '0');
@@ -133,13 +141,6 @@ export default function Journey() {
 
   return (
     <section id="journey" className="journey" ref={containerRef}>
-
-      {/* Prompt 
-      <p className="journey__prompt">
-        <span className="journey__prompt-dollar">$ </span>
-        cat ./my_journey.log
-      </p>
-      */}
 
       {/* Slides track */}
       <div
@@ -170,15 +171,27 @@ export default function Journey() {
                 </p>
               )}
 
-              {/* Certificate slot — competition & achievement only */}
+              {/* Certificate slot */}
               {m.type !== 'education' && (
                 <div className="journey__cert">
                   {m.certificate ? (
-                    <img
-                      src={m.certificate}
-                      alt={`${m.title} certificate`}
-                      className="journey__cert-img"
-                    />
+                    <button
+                      className="journey__cert-btn"
+                      onClick={() => openLightbox(m.certificate, `${m.title} certificate`)}
+                      aria-label={`View ${m.title} certificate`}
+                    >
+                      <img
+                        src={m.certificate}
+                        alt={`${m.title} certificate`}
+                        className="journey__cert-img"
+                      />
+                      <span className="journey__cert-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="20" height="20">
+                          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg>
+                        View
+                      </span>
+                    </button>
                   ) : (
                     <div className="journey__cert-placeholder">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="journey__cert-icon">
@@ -192,10 +205,7 @@ export default function Journey() {
               )}
             </div>
 
-            {/* Ghost year */}
             <span className="journey__ghost-year" aria-hidden="true">{m.year}</span>
-
-            {/* Slide counter */}
             <span className="journey__counter">{displayNum} / {totalNum}</span>
           </div>
         ))}
@@ -203,13 +213,7 @@ export default function Journey() {
 
       {/* Navigation */}
       <nav className="journey__nav" aria-label="Timeline navigation">
-        <button
-          className="journey__nav-btn"
-          onClick={() => goTo(current - 1)}
-          disabled={current === 0}
-          aria-label="Previous milestone"
-        >↑</button>
-
+        <button className="journey__nav-btn" onClick={() => goTo(current - 1)} disabled={current === 0} aria-label="Previous milestone">↑</button>
         <div className="journey__dots" role="tablist">
           {MILESTONES.map((_, i) => (
             <button
@@ -222,19 +226,35 @@ export default function Journey() {
             />
           ))}
         </div>
-
-        <button
-          className="journey__nav-btn"
-          onClick={() => goTo(current + 1)}
-          disabled={current === TOTAL - 1}
-          aria-label="Next milestone"
-        >↓</button>
+        <button className="journey__nav-btn" onClick={() => goTo(current + 1)} disabled={current === TOTAL - 1} aria-label="Next milestone">↓</button>
       </nav>
 
-      {/* Progress */}
-      <p className="journey__progress" aria-live="polite">
-        {TOTAL - current} / {TOTAL}
-      </p>
+      <p className="journey__progress" aria-live="polite">{TOTAL - current} / {TOTAL}</p>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="journey__lightbox"
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Certificate viewer"
+        >
+          <div className="journey__lightbox-inner" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="journey__lightbox-close"
+              onClick={closeLightbox}
+              aria-label="Close viewer"
+            >✕</button>
+            <img
+              src={lightbox.src}
+              alt={lightbox.alt}
+              className="journey__lightbox-img"
+            />
+            <p className="journey__lightbox-caption">{lightbox.alt}</p>
+          </div>
+        </div>
+      )}
 
     </section>
   );

@@ -1,5 +1,6 @@
 // src/pages/Home.jsx
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 
 const ROLES = [
@@ -98,9 +99,9 @@ export default function Home() {
                 <a href="#projects" className="btn btn--primary" onClick={scrollTo('projects')}>
                   view work
                 </a>
-                <a href="#contact" className="btn btn--ghost" onClick={scrollTo('contact')}>
+                <Link to="/contact" className="btn btn--ghost">
                   get in touch
-                </a>
+                </Link>
                 {/*     <a href="#" className="btn btn--ghost">↗ github</a>
                 <a href="#" className="btn btn--ghost">↗ linkedin</a> */}
               </div>

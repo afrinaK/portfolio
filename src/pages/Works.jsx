@@ -1,12 +1,13 @@
 // src/pages/Projects.jsx
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Works.css';
 
 const PROJECTS = [
   {
     id: '01',
-    title: 'Online Business Management System',
-    desc: 'A full stack database-intensive ecommerce project with advanced database engineering like triggers, stored procedures, and relational constraints with automated workflows.',
+    title: 'Shoppers Stop',
+    desc: 'A full‑stack e‑commerce platform with admin and customer panels, powered by advanced database automation.',
     tags: ['PHP', 'Oracle'],
     status: 'live',
     year: '2021',
@@ -17,7 +18,7 @@ const PROJECTS = [
   {
     id: '02',
     title: 'TWIN',
-    desc: 'A companion robot built with Raspberry Pi and Python, featuring mood detection, reminders, security alerts, and real‑time video monitoring.',
+    desc: 'A smart robot that cares, protects, and connects — with real‑time monitoring blending AI. ',
     tags: ['Python', 'AI','Flask', 'OpenCv'],
     status: 'live',
     year: '2021',
@@ -28,7 +29,7 @@ const PROJECTS = [
   {
     id: '03',
     title: 'Expense Tracker App',
-    desc: 'A Flutter mobile app for tracking and analyzing expenses with category management, local storage, and visual spending insights.',
+    desc: 'A Flutter mobile app for tracking expenses with category management and visual spending insights.',
     tags: ['Dart', 'Firebase'],
     status: 'live',
     year: '2023',
@@ -72,6 +73,7 @@ const STATUS_MAP = {
 
 export default function Projects() {
   const [filter, setFilter] = useState('all');
+  const navigate = useNavigate();
 
   const filtered = filter === 'featured'
     ? PROJECTS.filter(p => p.featured)

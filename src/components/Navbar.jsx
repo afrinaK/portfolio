@@ -5,7 +5,7 @@ import './Navbar.css';
 const NAV_LINKS = [
   { label: 'home',       href: '/',           type: 'route' },
   { label: 'projects',   href: '/projects',   type: 'route' },
-  { label: 'my_journey', href: '/my_journey', type: 'route' },
+  { label: 'milestones', href: '/my_journey', type: 'route' },
   { label: 'cv',         href: '/cv',         type: 'route' },
   { label: 'contact',    href: '/contact',    type: 'route' },
 ];

@@ -192,3 +192,15 @@
   .contact__grid { grid-template-columns: 1fr; }
   .form-row { flex-direction: column; }
 }
+
+.contact__error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  margin-bottom: 1rem;
+}
+
+.contact__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
