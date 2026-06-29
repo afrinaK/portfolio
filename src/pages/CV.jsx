@@ -2,26 +2,15 @@
 import '../styles/CV.css';
 
 const EXPERIENCE = [
-
   {
     role: 'Software Developer',
     org: 'DataSoft Systems Bangladesh Limited',
-    period: 'Mar 2022 — Dec 2023',
+    period: 'Sept 2023 — Current',
     location: 'Dhaka, BD',
     points: [
-      'Built company\'s design system from scratch, adopted across 6 product teams',
-      'Migrated legacy class-based React app to hooks, improving TTI by 60%',
-      'Integrated real-time features using WebSockets and SWR',
-    ],
-  },
-  {
-    role: 'Junior Developer',
-    org: 'Freelance',
-    period: '2019 — 2022',
-    location: 'Dhaka, BD',
-    points: [
-      'Delivered 15+ client projects: landing pages, dashboards, REST APIs',
-      'Built e-commerce platform handling 500+ daily transactions',
+      'Developed CH Terminal, a full-stack internal tool for metro rail operations — automating database-driven report generation, revenue calculation, and operational control workflows, cutting manual query time significantly.',
+      'Built and enhanced the user dashboard of the RapidPass website, improving usability and commuter experience.',
+      'Worked on a bKash application, delivering real-time transaction monitoring, risk profiling and secure transaction controls.',
     ],
   },
 ];
@@ -29,16 +18,18 @@ const EXPERIENCE = [
 const EDUCATION = [
   {
     degree: 'B.Sc. Computer Science & Engineering',
-    school: 'Bangladesh University of Engineering & Technology (MIST)',
-    year: '2017 — 2021',
-    note: 'CGPA 3.7 / 4.0',
+    school: 'Military Institute of Science and Technology (MIST)',
+    year: '2019 — 2023',
   },
 ];
+
+const SKILLS = ['PHP', 'Laravel', 'SQL', 'React', 'Angular', 'Spring Boot', 'Flutter'];
 
 export default function CV() {
   return (
     <section id="cv" className="section cv">
       <div className="container cv__inner">
+
         {/* Header */}
         <div className="cv__header">
           <div>
@@ -50,13 +41,13 @@ export default function CV() {
           </a>
         </div>
 
-        <div className="cv__grid">
+        <div className="cv__stack">
+
           {/* Experience */}
           <div className="cv__section">
             <h3 className="cv__section-title">
               <span className="cv__section-marker">// </span>experience
             </h3>
-
             <div className="cv__entries">
               {EXPERIENCE.map((job, i) => (
                 <div key={i} className="cv-entry">
@@ -83,63 +74,39 @@ export default function CV() {
             </div>
           </div>
 
+          {/* Education + Skills side by side */}
+          
+{/*         <div className="cv__section">
+              <h3 className="cv__section-title">
+                <span className="cv__section-marker">// </span>skills
+              </h3>
+              <div className="cv__chips">
+                {SKILLS.map(s => (
+                  <span key={s} className="chip">{s}</span>
+                ))}
+              </div>
+            </div> */}
 
-          {/* Education + extras */}
-          {/*
-          <div className="cv__sidebar">
             <div className="cv__section">
               <h3 className="cv__section-title">
                 <span className="cv__section-marker">// </span>education
               </h3>
               {EDUCATION.map((edu, i) => (
                 <div key={i} className="cv-edu">
-                  <span className="cv-edu__degree">{edu.degree}</span>
-                  <span className="cv-edu__school">{edu.school}</span>
-                  <span className="cv-edu__year">{edu.year}</span>
-                  <span className="cv-edu__note">{edu.note}</span>
+                  <div className="cv-edu__header">
+                    <div className="cv-edu__meta">
+                      <span className="cv-edu__degree">{edu.degree}</span>
+                      <span className="cv-edu__school">{edu.school}</span>
+                      <span className="cv-edu__year">{edu.year}</span>
+                    </div>
+                    
+                  </div>
+                  {edu.note && <span className="cv-edu__note">{edu.note}</span>}
                 </div>
               ))}
             </div>
 
-            <div className="cv__section">
-              <h3 className="cv__section-title">
-                <span className="cv__section-marker">// </span>highlights
-              </h3>
-              <div className="cv__chips">
-                {[
-                  'Open Source Contributor',
-                  'Technical Writer',
-                  'Speaker — DhakaTech 2023',
-                  'Hacktoberfest Maintainer',
-                  'ICPC Participant',
-                ].map(h => (
-                  <span key={h} className="chip">{h}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="cv__section">
-              <h3 className="cv__section-title">
-                <span className="cv__section-marker">// </span>languages
-              </h3>
-              <div className="cv__langs">
-                {[
-                  { lang: 'Bengali',  level: 'native' },
-                  { lang: 'English',  level: 'fluent' },
-                  { lang: 'Japanese', level: 'basic' },
-                ].map(({ lang, level }) => (
-                  <div key={lang} className="cv-lang">
-                    <span className="cv-lang__name">{lang}</span>
-                    <span className="cv-lang__level">{level}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          */}
-
-
+          
 
         </div>
       </div>

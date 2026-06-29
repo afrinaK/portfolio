@@ -17,9 +17,18 @@
   margin-top: auto;
 }
 
-.cv__grid {
+/* ── Single-column stack (replaces the old grid) ────────────── */
+.cv__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 720px;
+}
+
+/* ── Bottom row: education + skills side by side ────────────── */
+.cv__bottom-row {
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-8);
   align-items: start;
 }
@@ -129,6 +138,20 @@
   border-radius: var(--r-md);
 }
 
+.cv-edu__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.cv-edu__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .cv-edu__degree {
   font-size: 0.85rem;
   font-weight: 600;
@@ -145,6 +168,8 @@
 .cv-edu__year {
   font-size: 0.7rem;
   color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .cv-edu__note {
@@ -160,27 +185,9 @@
   gap: var(--space-2);
 }
 
-/* ── Languages ──────────────────────────────────────────────── */
-.cv__langs { display: flex; flex-direction: column; gap: var(--space-3); }
-
-.cv-lang {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-2) 0;
-  border-bottom: 1px solid var(--border-subtle);
-  font-size: 0.78rem;
-}
-
-.cv-lang__name { color: var(--text-secondary); }
-.cv-lang__level {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  letter-spacing: 0.06em;
-}
-
 /* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .cv__grid { grid-template-columns: 1fr; }
+@media (max-width: 700px) {
+  .cv__bottom-row { grid-template-columns: 1fr; }
   .cv-entry__aside { align-items: flex-start; }
+  .cv-edu__header { flex-direction: column; }
 }
