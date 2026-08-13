@@ -29,10 +29,10 @@ const MILESTONES = [
     id: 3,
     year: '2021',
     type: 'competition',
-    title: 'Debate Competition',
-    institution: 'University Debate Club',
+    title: 'BdApps National Hackathon',
+    institution: 'Regional Round - Dhaka-Mymensing division',
     description:
-      'Among co‑curriculars, enjoyed debate and public speaking — attended competitions and won a few awards.',
+      'Proceeded to Regional Round, Dhaka-Mymensing division of BdApps Hackathon with app idea being among top 300 nationally.',
     detail: 'public speaking & logic',
     certificate: null,
 
