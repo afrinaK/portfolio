@@ -9,8 +9,10 @@ const MILESTONES = [
     type: 'competition',
     title: 'NGPC — National Girls Programming Contest',
     institution: 'National Programming Competition',
-    description:
-      'Secured 24th position in Ada Lovelace National Girls programming contest and secured 13th position in the preliminery round.',
+    description:(
+        <>
+      Secured <span className="highlight">24th</span> position in Ada Lovelace National Girls programming contest and secured 13th position in the preliminery round.,
+      </> ),
     detail: 'competitive programming',
     certificate: '/images/journey/Ada_lovelace_new.png'
   },
@@ -20,8 +22,10 @@ const MILESTONES = [
     type: 'achievement',
     title: 'Project Competition',
     institution: 'Inter-University Project Showcase',
-    description:
-      'Secured 1st Runner Up position in Inter-University project showcasing competion arranged by Bangladesh Open Source Network.',
+    description:(
+        <> 
+      Secured <span className="highlight">1st Runner Up</span>  position in Inter-University project showcasing competion arranged by Bangladesh Open Source Network.
+      </> ),
     detail: 'project showcased',
     certificate: '/images/journey/Bdosn.png',
   },
@@ -34,7 +38,7 @@ const MILESTONES = [
     description:
       'Proceeded to Regional Round, Dhaka-Mymensing division of BdApps Hackathon with app idea being among top 300 nationally.',
     detail: 'public speaking & logic',
-    certificate: null,
+    certificate: '/images/journey/bdapps.jpg',
 
   },
   {
@@ -43,8 +47,10 @@ const MILESTONES = [
     type: 'competition',
     title: 'IT Olympiad',
     institution: 'IT Competition',
-    description:
-      'Secured 2nd Runner Up position in IT olmpiad arranged by TECHWARNO, a non profit organization.',
+    description:(
+        <>
+      Secured <span className="highlight">2nd Runner Up</span> position in IT Olympiad arranged by TECHWARNO, a non profit organization.
+     </>),
     detail: 'competed nationally',
     certificate: '/images/journey/techwarno.png',
 

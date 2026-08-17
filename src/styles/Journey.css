@@ -261,6 +261,13 @@
   cursor: default;
 }
 
+
+.highlight {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.2em;
+}
+
 /* ── Dots ────────────────────────────────────────────────────── */
 .journey__dots {
   display: flex;

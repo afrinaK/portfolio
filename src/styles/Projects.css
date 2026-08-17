@@ -82,6 +82,7 @@
   transition: transform 0.5s var(--ease);
 }
 
+
 .dl-proj-row:hover .dl-proj-row__img { transform: scale(1.04); }
 
 .dl-proj-row__media-overlay {
