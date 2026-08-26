@@ -32,7 +32,7 @@ const PROJECTS = [
     tags: ['Dart', 'Flutter', 'Firebase'],
     status: 'live',
     year: '2023',
-    image: '/images/projects/expense_tracker.jpeg',
+    image: '/images/projects/expense_app.png',
     link: '#',
     repo: 'https://github.com/afrinaK/Expense_Tracker_App',
   },
