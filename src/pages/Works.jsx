@@ -1,83 +1,69 @@
 // src/pages/Projects.jsx
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Works.css';
+import { FiStar, FiArrowUpRight, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import {
+  SiPhp, SiPython, SiFlask, SiOpencv,
+  SiDart, SiFirebase, SiReact, SiBootstrap,
+  SiHtml5, SiCss, SiJavascript,
+} from 'react-icons/si';
+
+const TAG_ICON_MAP = {
+  PHP:        { icon: SiPhp,        color: '#777BB4' },
+  Python:     { icon: SiPython,     color: '#3776AB' },
+  Flask:      { icon: SiFlask,      color: '#ffffff' },
+  OpenCv:     { icon: SiOpencv,     color: '#5C3EE8' },
+  Dart:       { icon: SiDart,       color: '#0175C2' },
+  Firebase:   { icon: SiFirebase,   color: '#FFCA28' },
+  React:      { icon: SiReact,      color: '#61DAFB' },
+  Bootstrap:  { icon: SiBootstrap,  color: '#7952B3' },
+  HTML:       { icon: SiHtml5,      color: '#E34F26' },
+  CSS:        { icon: SiCss,        color: '#1572B6' },
+  JS:         { icon: SiJavascript, color: '#F7DF1E' },
+};
 
 const PROJECTS = [
   {
     id: '01',
+    slug: 'shoppers-stop',
     title: 'Shoppers Stop',
-    desc: 'A full‑stack e‑commerce platform with admin and customer panels, powered by advanced database automation.',
+    image: '/images/projects/shoppers.png',
     tags: ['PHP', 'Oracle'],
-    status: 'live',
-    year: '2021',
-    link: '#',
-    repo: '#',
-    featured: true,
   },
   {
     id: '02',
+    slug: 'twin',
     title: 'TWIN',
-    desc: 'A smart robot that cares, protects, and connects — with real‑time monitoring blending AI. ',
-    tags: ['Python', 'AI','Flask', 'OpenCv'],
-    status: 'live',
-    year: '2021',
-    link: '#',
-    repo: '#',
-    featured: true,
+    image: '/images/projects/twin_raw.png',
+    tags: ['Python', 'AI', 'Flask'],
   },
   {
     id: '03',
+    slug: 'expense-tracker',
     title: 'Expense Tracker App',
-    desc: 'A Flutter mobile app for tracking expenses with category management and visual spending insights.',
+    image: '/images/projects/expense_app.png',
     tags: ['Dart', 'Firebase'],
-    status: 'live',
-    year: '2023',
-    link: '#',
-    repo: '#',
-    featured: true,
   },
-  // {
-  //   id: '04',
-  //   title: 'Gymnesia',
-  //   desc: 'A gym website built with React 19, Vite, Bootstrap 5, and Axios, showcasing fitness services for a Dhaka-based fitness center',
-  //   tags: ['React', 'Bootstrap', 'HTML', 'JS'],
-  //   status: 'live',
-  //   year: '2023',
-  //   link: '#',
-  //   repo: '#',
-
-
-
-  //   featured: false,
-  // },
-  // {
-  //   id: '05',
-  //   title: 'The Dessert Club',
-  //   desc: 'A basic dessert selling website built with  HTML, CSS, and JavaScript, hosted on GitHub Pages.',
-  //   tags: ['HTML', 'CSS', 'JS','Firebase'],
-  //   status: 'live',
-  //   year: '2022',
-  //   link: '#',
-  //   repo: '#',
-  //   featured: false,
-  // },
-
 ];
 
-const STATUS_MAP = {
-  live:     { label: 'live',     color: 'var(--status-live)' },
-  wip:      { label: 'wip',      color: 'var(--status-wip)' },
-  archived: { label: 'archived', color: 'var(--status-archived)' },
-};
 
 export default function Projects() {
   const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
+  const trackRef = useRef(null);
 
   const filtered = filter === 'featured'
     ? PROJECTS.filter(p => p.featured)
     : PROJECTS;
+
+  const scrollByCard = (dir) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector('.scroll-card');
+    const amount = card ? card.offsetWidth + 20 : 320;
+    track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+  };
 
   return (
     <section id="projects" className="section projects">
@@ -89,76 +75,57 @@ export default function Projects() {
             <h2 className="section-title">Selected Work</h2>
           </div>
 
-          {/* Filter pills */}
-          <div className="projects__filters">
-            {['all', 'featured'].map(f => (
-              <button
-                key={f}
-                className={`projects__filter ${filter === f ? 'projects__filter--active' : ''}`}
-                onClick={() => setFilter(f)}
-              >
-                {f}
+          <div className="projects__header-controls">
+            <div className="projects__filters">
+              {['all', 'featured'].map(f => (
+                <button
+                  key={f}
+                  className={`projects__filter ${filter === f ? 'projects__filter--active' : ''}`}
+                  onClick={() => setFilter(f)}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+
+            <div className="scroll-arrows">
+              <button className="scroll-arrow" onClick={() => scrollByCard(-1)} aria-label="Scroll left">
+                <FiChevronLeft />
               </button>
-            ))}
+              <button className="scroll-arrow" onClick={() => scrollByCard(1)} aria-label="Scroll right">
+                <FiChevronRight />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Table header */}
-        <div className="projects__table-head">
-          <span>_id</span>
-          <span>project</span>
-          <span className="projects__col-tags">stack</span>
-          <span>year</span>
-          <span>status</span>
-          <span>links</span>
-        </div>
-
-        {/* Rows */}
-        <div className="projects__list">
-          {filtered.map((project) => {
-            const status = STATUS_MAP[project.status];
-            return (
-              <div key={project.id} className="project-row">
-                <span className="project-row__id">{project.id}</span>
-
-                <div className="project-row__info">
-                  <span className="project-row__title">{project.title}</span>
-                  <span className="project-row__desc">{project.desc}</span>
-                </div>
-
-                <div className="project-row__tags">
-                  {project.tags.slice(0, 3).map(tag => (
-                    <span key={tag} className="project-row__tag">{tag}</span>
-                  ))}
-                </div>
-
-                <span className="project-row__year">{project.year}</span>
-
-                <span
-                  className="project-row__status"
-                  style={{ '--status-color': status.color }}
-                >
-                  <span className="project-row__status-dot" />
-                  {status.label}
-                </span>
-
-                <div className="project-row__links">
-                  <a href={project.link} className="project-row__link" title="Live site">↗</a>
-                  <a href={project.repo} className="project-row__link" title="Repository">{ }</a>
-                </div>
-
-
+        {/* Horizontal scroll track */}
+        <div className="scroll-track" ref={trackRef}>
+          {filtered.map((project) => (
+            <Link
+              key={project.title}
+              to={`/projects#${project.id}`}
+              className="scroll-card"
+            >
+              <div className="scroll-card__image">
+                <img src={project.image} alt={project.title} loading="lazy" />
               </div>
-            );
-          })}
-        </div>
-        {/* Footer with See More button */}
-        <div className="work__footer">
-          <button 
-            className="see-more-btn" 
-            onClick={() => navigate('/projects')}
-          >
-            See More →
+
+              <h3 className="scroll-card__title">{project.title}</h3>
+
+              <div className="scroll-card__tags">
+                {project.tags.slice(0, 4).map(tag => (
+                  <span key={tag} className="scroll-card__tag">{tag}</span>
+                ))}
+              </div>
+            </Link>
+
+          ))}
+
+
+          <button className="scroll-card scroll-card--more" onClick={() => navigate('/projects')}>
+            <span>See all projects</span>
+            <FiArrowUpRight />
           </button>
         </div>
       </div>

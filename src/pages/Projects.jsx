@@ -79,15 +79,23 @@ function ProjectMedia({ project }) {
   }
 
   return (
-    <img
-      src={project.image}
-      alt={project.title}
-      className="dl-proj-row__img"
-      loading="lazy"
-      onError={() => setErrored(true)}
-    />
+    <a
+      href={project.repo}
+      target="_blank"
+      rel="noreferrer"
+      className="dl-proj-row__img-link"
+    >
+      <img
+        src={project.image}
+        alt={project.title}
+        className="dl-proj-row__img"
+        loading="lazy"
+        onError={() => setErrored(true)}
+      />
+    </a>
   );
 }
+
 
 export default function Projects() {
   return (
@@ -121,13 +129,6 @@ export default function Projects() {
                 <div className="dl-proj-row__top">
                   <span className="dl-proj-row__index">{project.id}</span>
                   <span className="dl-proj-row__year">{project.year}</span>
-                  <span
-                    className="dl-proj-row__status"
-                    style={{ '--status-color': `var(--status-${project.status})` }}
-                  >
-                    <span className="dl-proj-row__status-dot" />
-                    {STATUS_LABEL[project.status]}
-                  </span>
                 </div>
 
                 <h3 className="dl-proj-row__title">{project.title}</h3>
@@ -140,20 +141,10 @@ export default function Projects() {
                 </div>
 
                 <div className="dl-proj-row__links">
-                  {project.link && project.link !== '#' && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="dl-proj-row__link dl-proj-row__link--primary"
-                    >
-                      live ↗
-                    </a>
-                  )}
 
                   {project.repo && (
                     <a href={project.repo} target="_blank" rel="noreferrer" className="dl-proj-row__link">
-                      code
+                      Github
                     </a>
                   )}
                 </div>

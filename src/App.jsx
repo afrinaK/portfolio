@@ -11,6 +11,7 @@ import CV from './pages/CV';
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 
+
 export default function App() {
   return (
     <Router>

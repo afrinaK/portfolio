@@ -1,11 +1,6 @@
 // src/pages/Home.jsx
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  SiReact, SiLaravel, SiPhp, SiMysql,
-  SiJavascript, SiGit, SiBootstrap, SiJquery,
-} from 'react-icons/si';
-import { FiBriefcase, FiBook } from 'react-icons/fi';
 import '../styles/Home.css';
 
 const ROLES = [
@@ -14,22 +9,11 @@ const ROLES = [
   'Travel Enthusiast',
 ];
 
-/* const STATS = [
+const STATS = [
   { value: '2+',  label: 'years exp.' },
   { value: '20+', label: 'projects' },
   { value: '5+',  label: 'clients' },
   { value: '∞',   label: 'coffee cups' },
-]; */
-
-const STACK = [
-  { icon: SiReact,       label: 'React',      color: '#61DAFB' },
-  { icon: SiLaravel,     label: 'Laravel',    color: '#FF2D20' },
-  { icon: SiPhp,         label: 'PHP',        color: '#777BB4' },
-  { icon: SiMysql,       label: 'MySQL',      color: '#4479A1' },
-  { icon: SiJavascript,  label: 'JavaScript', color: '#F7DF1E' },
-  { icon: SiBootstrap,   label: 'Bootstrap',  color: '#7952B3' },
-  { icon: SiJquery,      label: 'jQuery',     color: '#0769AD' },
-  { icon: SiGit,         label: 'Git',        color: '#F05032' },
 ];
 
 const TIMELINE = [
@@ -132,7 +116,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Stats 
+            {/* Stats */}
             <div className="home__stats">
               {STATS.map(({ value, label }) => (
                 <div key={label} className="home__stat">
@@ -140,24 +124,9 @@ export default function Home() {
                   <span className="home__stat-label">{label}</span>
                 </div>
               ))}
-            </div>*/}
-           
-
-          {/* replace .home__stats div with this */}
-          <div className="home__stack">
-            <span className="home__stack-label">
-              <span className="home__prompt">$ </span>ls ./stack
-            </span>
-            <div className="home__stack-grid">
-              {STACK.map(({ icon: Icon, label, color }) => (
-                <div key={label} className="home__stack-item" style={{ '--tech-color': color }}>
-                  <Icon className="home__stack-icon" />
-                  <span className="home__stack-name">{label}</span>
-                </div>
-              ))}
             </div>
           </div>
-</div>
+
           {/* ── Timeline ── */}
           <div className="home__timeline-section animate-fade-up" style={{ animationDelay: '0.5s' }}>
             <h3 className="home__timeline-heading">
@@ -167,9 +136,7 @@ export default function Home() {
               {TIMELINE.map((item, i) => (
                 <div key={i} className="home__timeline-item">
                   <div className="home__timeline-year">{item.year}</div>
-                  <div className="home__timeline-dot">
-                    {item.type === 'work' ? <FiBriefcase /> : <FiBook />}
-                  </div>
+                  <div className="home__timeline-dot" />
                   <div className="home__timeline-content">
                     <span className="home__timeline-role">{item.role}</span>
                     <span className="home__timeline-org">— {item.org}</span>
