@@ -1,27 +1,8 @@
-// src/pages/Projects.jsx
-import { useState, useRef } from 'react';
+// src/pages/Works.jsx
+import { useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Works.css';
-import { FiStar, FiArrowUpRight, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import {
-  SiPhp, SiPython, SiFlask, SiOpencv,
-  SiDart, SiFirebase, SiReact, SiBootstrap,
-  SiHtml5, SiCss, SiJavascript,
-} from 'react-icons/si';
-
-const TAG_ICON_MAP = {
-  PHP:        { icon: SiPhp,        color: '#777BB4' },
-  Python:     { icon: SiPython,     color: '#3776AB' },
-  Flask:      { icon: SiFlask,      color: '#ffffff' },
-  OpenCv:     { icon: SiOpencv,     color: '#5C3EE8' },
-  Dart:       { icon: SiDart,       color: '#0175C2' },
-  Firebase:   { icon: SiFirebase,   color: '#FFCA28' },
-  React:      { icon: SiReact,      color: '#61DAFB' },
-  Bootstrap:  { icon: SiBootstrap,  color: '#7952B3' },
-  HTML:       { icon: SiHtml5,      color: '#E34F26' },
-  CSS:        { icon: SiCss,        color: '#1572B6' },
-  JS:         { icon: SiJavascript, color: '#F7DF1E' },
-};
+import { FiArrowUpRight, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const PROJECTS = [
   {
@@ -47,15 +28,9 @@ const PROJECTS = [
   },
 ];
 
-
 export default function Projects() {
-  const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
   const trackRef = useRef(null);
-
-  const filtered = filter === 'featured'
-    ? PROJECTS.filter(p => p.featured)
-    : PROJECTS;
 
   const scrollByCard = (dir) => {
     const track = trackRef.current;
@@ -75,38 +50,20 @@ export default function Projects() {
             <h2 className="section-title">Selected Work</h2>
           </div>
 
-          <div className="projects__header-controls">
-            <div className="projects__filters">
-              {['all', 'featured'].map(f => (
-                <button
-                  key={f}
-                  className={`projects__filter ${filter === f ? 'projects__filter--active' : ''}`}
-                  onClick={() => setFilter(f)}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-
-            <div className="scroll-arrows">
-              <button className="scroll-arrow" onClick={() => scrollByCard(-1)} aria-label="Scroll left">
-                <FiChevronLeft />
-              </button>
-              <button className="scroll-arrow" onClick={() => scrollByCard(1)} aria-label="Scroll right">
-                <FiChevronRight />
-              </button>
-            </div>
+          <div className="scroll-arrows">
+            <button type="button" className="scroll-arrow" onClick={() => scrollByCard(-1)} aria-label="Scroll left">
+              <FiChevronLeft />
+            </button>
+            <button type="button" className="scroll-arrow" onClick={() => scrollByCard(1)} aria-label="Scroll right">
+              <FiChevronRight />
+            </button>
           </div>
         </div>
 
         {/* Horizontal scroll track */}
         <div className="scroll-track" ref={trackRef}>
-          {filtered.map((project) => (
-            <Link
-              key={project.title}
-              to={`/projects#${project.id}`}
-              className="scroll-card"
-            >
+          {PROJECTS.map((project) => (
+            <Link key={project.id} to={`/projects#${project.id}`} className="scroll-card">
               <div className="scroll-card__image">
                 <img src={project.image} alt={project.title} loading="lazy" />
               </div>
@@ -119,11 +76,9 @@ export default function Projects() {
                 ))}
               </div>
             </Link>
-
           ))}
 
-
-          <button className="scroll-card scroll-card--more" onClick={() => navigate('/projects')}>
+          <button type="button" className="scroll-card scroll-card--more" onClick={() => navigate('/projects')}>
             <span>See all projects</span>
             <FiArrowUpRight />
           </button>

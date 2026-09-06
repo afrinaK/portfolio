@@ -1,6 +1,7 @@
 // src/pages/Projects.jsx
 import '../styles/Projects.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const PROJECTS = [
   {
@@ -98,6 +99,22 @@ function ProjectMedia({ project }) {
 
 
 export default function Projects() {
+  const { hash } = useLocation();
+
+  // Scroll to the linked project card when arriving via /projects#01 etc.
+  useEffect(() => {
+    if (!hash) return;
+
+    const id = hash.replace('#', '');
+    // Wait a tick so the section has mounted/rendered before scrolling.
+    const timer = setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [hash]);
+
   return (
     <section id="projects" className="section dl-proj">
       <div className="container dl-proj__inner">
@@ -116,6 +133,7 @@ export default function Projects() {
         <div className="dl-proj__list">
           {PROJECTS.map((project, i) => (
             <article
+              id={project.id}
               key={project.id}
               className={`dl-proj-row animate-fade-up ${i % 2 === 1 ? 'dl-proj-row--reverse' : ''}`}
               style={{ animationDelay: `${0.1 + i * 0.08}s` }}

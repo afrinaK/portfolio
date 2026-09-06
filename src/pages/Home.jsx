@@ -10,7 +10,7 @@ const ROLES = [
 ];
 
 const STATS = [
-  { value: '2+',  label: 'years exp.' },
+  { value: '3+',  label: 'years exp.' },
   { value: '20+', label: 'projects' },
   { value: '5+',  label: 'clients' },
   { value: '∞',   label: 'coffee cups' },

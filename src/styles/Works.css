@@ -38,7 +38,9 @@
   display: flex;
   gap: var(--space-4);
   overflow-x: auto;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
+  padding-top: var(--space-3);   /* was missing — gives the lifted card room */
   padding-bottom: var(--space-4);
   scrollbar-width: none;
 }
@@ -186,8 +188,17 @@
   background: var(--accent-subtle);
 }
 
+@media (max-width: 640px) {
+  .scroll-card {
+    flex-basis: 280px;
+  }
+}
+
 @media (max-width: 480px) {
   .scroll-card {
-    flex-basis: 260px;
+    flex-basis: 240px;
+  }
+  .scroll-card__image {
+    height: 180px;
   }
 }

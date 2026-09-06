@@ -8,9 +8,10 @@ const EXPERIENCE = [
     period: 'Sept 2023 — Current',
     location: 'Dhaka, BD',
     points: [
-      'Developed CH Terminal, a full-stack internal tool for metro rail operations — automating database-driven report generation, revenue calculation, and operational control workflows, cutting manual query time significantly.',
-      'Built and enhanced the user dashboard of the RapidPass website, improving usability and commuter experience.',
-      'Worked on a bKash application, delivering real-time transaction monitoring, risk profiling and secure transaction controls.',
+      'CH Terminal, developed a full-stack tool for metro rail operations — automating database-driven report generation, revenue calculation, and operational control workflows, cutting manual query time significantly.',
+      'RapidPass Website, built and enhanced the user dashboard of the RapidPass website, improving usability and commuter experience.',
+      'bKash Application, worked on a bKash application, delivering real-time transaction monitoring, risk profiling and secure transaction controls.',
+      'AIinArts, developed and refined frontend UI and inventory modules for an AI‑driven art marketplace, integrating art generation features and categorization logic.',
     ],
   },
 ];
@@ -36,7 +37,7 @@ export default function CV() {
             <p className="section-label">04 — cv</p>
             <h2 className="section-title">Curriculum Vitae</h2>
           </div>
-          <a href="/cv.pdf" className="btn btn--ghost cv__download" download>
+          <a href="/afrina_kabir_cv.pdf" className="btn btn--ghost cv__download" download>
             ↓ download PDF
           </a>
         </div>
@@ -65,10 +66,19 @@ export default function CV() {
                     {job.points.map((pt, j) => (
                       <li key={j} className="cv-entry__point">
                         <span className="cv-entry__bullet">▸</span>
-                        {pt}
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: pt
+                              .replace('CH Terminal', '<b><i>CH Terminal</i></b>')
+                              .replace('RapidPass Website', '<b><i>RapidPass Website</i></b>')
+                              .replace('bKash Application', '<b><i>bKash Application</i></b>')
+                              .replace('AIinArts', '<b><i>AIinArts</i></b>'),
+                          }}
+                        />
                       </li>
                     ))}
                   </ul>
+
                 </div>
               ))}
             </div>

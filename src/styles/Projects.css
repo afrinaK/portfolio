@@ -57,6 +57,7 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--space-8);
   align-items: center;
+  scroll-margin-top: 100px;
 }
 
 /* Even rows: image left — swap via order */
